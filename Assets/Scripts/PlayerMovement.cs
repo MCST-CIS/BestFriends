@@ -41,14 +41,30 @@ public class PlayerMovement : MonoBehaviour
         else if (moveX < 0) spriteRenderer.sprite = facingLeft;
         else spriteRenderer.sprite = facingForward;
     }
-
     void OnCollisionEnter2D(Collision2D col)
     {
-        isGrounded = true;
+        foreach (ContactPoint2D contact in col.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
     }
 
     void OnCollisionExit2D(Collision2D col)
     {
         isGrounded = false;
+
+        // Re-check all other collisions to see if still grounded
+        foreach (ContactPoint2D contact in col.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
     }
 }
