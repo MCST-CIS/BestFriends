@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: ef56a8b4da7bc644eb916994d37a0811
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - facingForward: {fileID: 9127510635913676980, guid: 23fa6c5b19c257144a0a0be6e1df9aa1, type: 3}
+  - facingLeft: {fileID: -7897529910545368525, guid: 0a0f120db29430f40a0fe7228345d21f, type: 3}
+  - facingRight: {fileID: -9159441071106175564, guid: bdbd596b2f134da4bad1187df8175163, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
