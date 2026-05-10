@@ -10,8 +10,13 @@ public class Key : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             Debug.Log("key picked up");
-            door.GetComponent<BoxCollider2D>().enabled = false;
-
+            foreach (BoxCollider2D boxCol in door.GetComponents<BoxCollider2D>())
+            {
+                if (!boxCol.isTrigger)
+                {
+                    boxCol.enabled = false;
+                }
+            }
             this.gameObject.SetActive(false);
         }
     }
