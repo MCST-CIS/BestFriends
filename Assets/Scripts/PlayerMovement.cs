@@ -28,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
 
     public bool abilityActive = false;
-    private float abilityTimer = 0f;
-    private float cooldownTimer = 0f;
+    public float abilityTimer = 0f;
+    public float cooldownTimer = 0f;
     private const float abilityDuration = 5f;
     private const float cooldown = 10f;
 
