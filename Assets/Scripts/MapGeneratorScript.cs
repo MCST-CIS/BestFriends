@@ -13,8 +13,8 @@ public class MapGeneratorScript : MonoBehaviour
     public GameObject ceiling;
 
     [Header("Map Settings")]
-    public float mapLeft = -9.64f;
-    public float mapRight = 12.18f;
+    public float mapLeft = -10.91f;
+    public float mapRight = 10.91f;
     public float floorY = -4.65f;
     public float minMapHeight = 20f;
     public float maxMapHeight = 35f;
@@ -27,11 +27,6 @@ public class MapGeneratorScript : MonoBehaviour
     private List<Rect> occupiedRects = new List<Rect>();
     private float mapHeight;
     private float camOrthoSize = 9.53713f;
-
-    void Start()
-    {
-        GenerateMap();
-    }
 
     public void GenerateMap()
     {
@@ -46,10 +41,8 @@ public class MapGeneratorScript : MonoBehaviour
 
         float ceilingY = floorY + mapHeight;
 
-        // Position ceiling
-        if (ceiling != null) ceiling.transform.position = new Vector3(1.27f, ceilingY, 0);
+        if (ceiling != null) ceiling.transform.position = new Vector3(0f, ceilingY, 0);
 
-        // Position and scale walls to exactly fill from floor to ceiling
         GameObject leftWall = GameObject.Find("LeftWall");
         GameObject rightWall = GameObject.Find("RightWall");
 
@@ -58,22 +51,21 @@ public class MapGeneratorScript : MonoBehaviour
 
         if (leftWall != null)
         {
-            leftWall.transform.position = new Vector3(-9.64f, wallCenterY, 0);
+            leftWall.transform.position = new Vector3(-10.91f, wallCenterY, 0);
             SpriteRenderer lr = leftWall.GetComponent<SpriteRenderer>();
             if (lr != null) lr.size = new Vector2(lr.size.x, wallHeight);
         }
         if (rightWall != null)
         {
-            rightWall.transform.position = new Vector3(12.18f, wallCenterY, 0);
+            rightWall.transform.position = new Vector3(10.91f, wallCenterY, 0);
             SpriteRenderer rr = rightWall.GetComponent<SpriteRenderer>();
             if (rr != null) rr.size = new Vector2(rr.size.x, wallHeight);
         }
 
-        // Set camera start position and clamp
         float camMinY = floorY + camOrthoSize;
         float camMaxY = ceilingY - camOrthoSize;
 
-        Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, camMinY, Camera.main.transform.position.z);
+        Camera.main.transform.position = new Vector3(0f, camMinY, Camera.main.transform.position.z);
 
         CameraFollow cam = Object.FindFirstObjectByType<CameraFollow>();
         if (cam != null)
@@ -85,7 +77,6 @@ public class MapGeneratorScript : MonoBehaviour
         if (player1 != null) player1.position = new Vector3(-1f, floorY + 1f, 0);
         if (player2 != null) player2.position = new Vector3(1f, floorY + 1f, 0);
 
-        // Reset abilities
         foreach (PlayerMovement player in Object.FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None))
         {
             player.abilityActive = false;
@@ -98,10 +89,20 @@ public class MapGeneratorScript : MonoBehaviour
         TrySpawnAtValidPosition(jumpPadPrefab, 5f, 2f, floorY + 2f, floorY + mapHeight * 0.33f, 4f);
         TrySpawnAtValidPosition(keyPrefab, 1f, 1f, floorY + mapHeight * 0.6f, floorY + mapHeight * 0.8f);
 
+        // Spawn a guaranteed platform for the door/exit area
         float doorY = floorY + mapHeight - 2f;
         float doorX = Random.Range(mapLeft + 4f, mapRight - 4f);
+        float platformY = doorY - 2f;
+
+        // Spawn the platform first so door always has something to stand on
+        SpawnObjectAt(platformPrefab, doorX, platformY, 4f, 0.5f);
+
         GameObject door = SpawnObjectAt(doorPrefab, doorX, doorY, 1.5f, 3f);
         GameObject circle = SpawnObjectAt(circlePrefab, doorX, doorY, 1f, 1f);
+
+        // Reset door state
+        Door doorScript = door.GetComponent<Door>();
+        if (doorScript != null) doorScript.ResetDoor();
 
         Key keyScript = Object.FindFirstObjectByType<Key>();
         if (keyScript != null) keyScript.door = door;
