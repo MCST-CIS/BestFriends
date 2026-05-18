@@ -1,0 +1,8 @@
+{
+  "name": "BestFriends - Game Jam Website",
+  "description": "A game jam website for BestFriends, a cooperative tower-climbing puzzle game inspired by Fireboy and Watergirl.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
