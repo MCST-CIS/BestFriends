@@ -1004,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &242165542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1329,8 +1329,10 @@ MonoBehaviour:
     Collect
     the key first to unlock the door!
 
-    Race to the top as fast as you can and
-    beat your best times!'
+    Don''t leave youjr friend behind otherwise
+    you both lose!
+
+    Race to the top as fast as you can and beat your best times!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3768,7 +3770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 4369572136041557648, guid: 8ba5ae627f3156a41bbe51d8fc8e4647, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
