@@ -16,7 +16,7 @@ public class Door : MonoBehaviour
                 else player2Inside = true;
             }
 
-            if (player1Inside && player2Inside)
+            if (player1Inside && player2Inside && !GameManager.Instance.isGameOver)
             {
                 GameManager.Instance.WinRound();
             }

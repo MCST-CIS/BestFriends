@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameScreen;
     public GameObject playAgainScreen;
     public GameObject leaderboardScreen;
+    public GameObject instructionScreen;
 
     [Header("UI Text")]
     public TextMeshProUGUI timerText;
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
     private List<float> leaderboard = new List<float>();
     private MapGeneratorScript mapGenerator;
     private Camera mainCam;
+    public bool isGameOver = false;
+    private bool cameFromPlayAgain = false;
 
     void Awake()
     {
@@ -73,13 +76,28 @@ public class GameManager : MonoBehaviour
         gameScreen.SetActive(false);
         playAgainScreen.SetActive(false);
         leaderboardScreen.SetActive(false);
+        if (instructionScreen != null) instructionScreen.SetActive(false);
+    }
+
+    public void ShowInstructions()
+    {
+        titleScreen.SetActive(false);
+        if (instructionScreen != null) instructionScreen.SetActive(true);
+    }
+
+    public void BackToTitle()
+    {
+        if (instructionScreen != null) instructionScreen.SetActive(false);
+        titleScreen.SetActive(true);
     }
 
     public void StartGame()
     {
+        isGameOver = false;
         timer = 0f;
         isPlaying = true;
         titleScreen.SetActive(false);
+        if (instructionScreen != null) instructionScreen.SetActive(false);
         gameScreen.SetActive(true);
         playAgainScreen.SetActive(false);
         leaderboardScreen.SetActive(false);
@@ -93,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     void EndRound(bool won, string reason)
     {
+        isGameOver = true;
         isPlaying = false;
 
         if (won)
@@ -115,11 +134,24 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
+    public void ShowLeaderboardFromTitle()
+    {
+        cameFromPlayAgain = false;
+        titleScreen.SetActive(false);
+        leaderboardScreen.SetActive(true);
+        UpdateLeaderboardText();
+    }
+
     public void ShowLeaderboard()
     {
+        cameFromPlayAgain = true;
         playAgainScreen.SetActive(false);
         leaderboardScreen.SetActive(true);
+        UpdateLeaderboardText();
+    }
 
+    void UpdateLeaderboardText()
+    {
         if (leaderboard.Count == 0)
         {
             leaderboardText.text = "No times yet!";
@@ -137,7 +169,14 @@ public class GameManager : MonoBehaviour
     public void BackFromLeaderboard()
     {
         leaderboardScreen.SetActive(false);
-        playAgainScreen.SetActive(true);
+        if (cameFromPlayAgain)
+        {
+            playAgainScreen.SetActive(true);
+        }
+        else
+        {
+            titleScreen.SetActive(true);
+        }
     }
 
     string FormatTime(float time)
