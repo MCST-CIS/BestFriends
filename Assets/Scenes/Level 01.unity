@@ -698,7 +698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 0, y: -500}
   m_SizeDelta: {x: 275, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210047050
@@ -1004,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &242165542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1305,32 +1305,32 @@ MonoBehaviour:
 
     - Jump: W
 
-    - Ability: J
-    - Double jump height for 5 seconds
+    - Ability: J - Double
+    jump height for 5 seconds
 
-    
+
 
     Player 2 (Arrow Keys):
 
-    -
-    Move: Left/Right
+    - Move: Left/Right
 
-    - Jump: Up
+    -
+    Jump: Up
 
     - Ability: Semicolon - Teleport to P1
 
-    -
-    Ability 2: Apostrophe - Pull P1 to you
+    - Ability 2: Apostrophe
+    - Pull P1 to you
 
-    
 
-    Both players must touch the
-    blue circle to win!
 
-    Collect the key first to unlock the door!
+    Both players must touch the blue circle to win!
 
-    Race
-    to the top as fast as you can and beat your best times!'
+    Collect
+    the key first to unlock the door!
+
+    Race to the top as fast as you can and
+    beat your best times!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
